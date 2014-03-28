@@ -1,0 +1,4 @@
+crowdy
+======
+
+Crowdsourcing platform
