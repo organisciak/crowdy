@@ -1,4 +1,4 @@
 crowdy
 ======
 
-Crowdsourcing platform
+Crowdsourcing platform. Best with oatcakes.
