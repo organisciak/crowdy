@@ -5,9 +5,10 @@
 	  </div>
 	  
       	<div class="panel-body">
-			<div class="error-display" ng-show="turkForm.$submitted">
+			<div class="error-display" ng-show="turkForm.$submitted || (condition === 'fast' && itemForm.$dirty)">
 				<alert type='danger' ng-show="itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
 				<alert type='danger' ng-show="itemForm.$error.required">Need to enter tags. </alert>
+				<alert type='info' ng-show="condition === 'fast' && itemForm.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
 			<div class="col-md-12">
