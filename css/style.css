@@ -1,0 +1,31 @@
+.ng-invalid.ng-dirty {
+    border-color: red;
+}
+.ng-valid.ng-dirty {
+    border-color: green;
+}
+
+
+body {
+    margin-top: 1em;
+}
+
+.masonry-brick {
+    #margin: 1em;
+    display: none;
+}
+
+.masonry-brick.loaded {
+    display: block;
+}
+
+span.item-tag {
+  padding: 5px;
+  margin: 0 5px;
+  border: solid 1px steelblue;
+  border-radius: 4px;
+}
+
+.tag-display, .error-display {
+  margin: 10px 0 10px 0;
+}

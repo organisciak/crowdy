@@ -1,0 +1,20 @@
+<tagging-instructions></tagging-instructions>
+<br />
+
+<form name="turkForm" id="turkForm" method="POST" novalidate>
+<div class="row itemgrid" masonry>
+	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in task.items"></tag-item>
+</div>
+
+<!-- START FEEDBACK -->
+<div class="row">
+    <feedback-form></feedback-form> 
+</div>
+<!-- END FEEDBACK -->
+<!-- START SUBMIT -->
+<div class="row">
+ <input type="hidden" name="assignmentId" id="myAssignmentId" value="" />
+ <input id="submitButton" type="submit" name="submit" ng-click="submitForm()" class="btn btn-primary" value="Submit" />
+</div>
+<!-- END SUBMIT-->
+</form>
