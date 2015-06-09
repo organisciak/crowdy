@@ -21,11 +21,12 @@ body {
 
 span.item-tag {
   padding: 5px;
-  margin: 0 5px;
+  margin: 2px 5px;
   border: solid 1px steelblue;
   border-radius: 4px;
+  display: inline-block;
 }
 
-.tag-display, .error-display {
+.error-display {
   margin: 10px 0 10px 0;
 }

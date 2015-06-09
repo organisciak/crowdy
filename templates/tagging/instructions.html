@@ -1,9 +1,4 @@
 <section>
-		  <div class="col-sm-12" ng-show="{{instructions.details.preview}}" style="color:#5e5e5e; background-color:#fafafa">
-      <strong>CONSENT LANGUAGE PLACEHOLDER</strong>
-      <p>This task is part of research on image retrieval task design at the University of Illinois. The judgments you provide will help us in asking better questions in the future.</p>
-      <p><em>Details about this task, our research, and your rights as a participant are written below.</em></p>
-    </div>
     <h2>{{instructions.details.title}}</h2>
     <!-- START PREVIEW NOTICE -->
     <section class="preview-notice" ng-if="task.preview">
@@ -14,16 +9,44 @@
      <!-- END PREVIEW NOTICE -->
      <!-- WRAP THE REST OF TASK IN FORM -->
 
+<ul class="nav nav-tabs">
+  <li role="presentation" ng-class="{active:tab === 'instruct'}"><a href ng-click="setTab('instruct')">Instructions</a></li>
+  <li role="presentation" ng-class="{active:tab === 'info'}"><a href ng-click="setTab('info')">Study Info</a></li>
+  <li role="presentation" ng-class="{active:tab === 'tips'}"><a href ng-click="setTab('tips')">Tips</a></li>
+</ul>
+
 <div class="row">
-	<div class="col-md-12">
-	<p>Label each of the images below with at least two tags. A tag is a short word or phrases describing what is in the image.</p>
+	<!-- Main Instructions -->
+	<div ng-if="tab==='instruct'" ng-class="{'col-md-12': !task.preview, 'col-md-6': task.preview}">
+		<p>Label each of the images below with at least two tags. A tag is a short word or phrases describing what is in the image.</p>
 
-	<p> Good and interesting tags describe actions and objects in the image. e.g. "seagull", "running", "cats"</p>
-	<p>Bad tags don't describe what is in the image, describe things too generally (e.g. 'blue', 'person'), or describe things that are not the focus of the image (e.g. tagging an image of a surfer as "water").</p>
-	<p>One way to think of good tags is to consider, "if somebody was searching for this word, would this be an image that they'd want to find?"</p>
+		<p> Good and interesting tags describe actions and objects in the image. e.g. "seagull", "running", "cats"</p>
+		<p>Bad tags don't describe what is in the image, describe things too generally (e.g. 'blue', 'person'), or describe things that are not the focus of the image (e.g. tagging an image of a surfer as "water").</p>
+		<p>One way to think of good tags is to consider, "if somebody was searching for this word, would this be an image that they'd want to find?"</p>
 
-	<p><strong>Time Estimate: {{instructions.details.timeEstimate}}</strong></p>
-	<p>TIP: pressing TAB will jump to the next input box.</p>
+		<p><strong>Time Estimate: {{instructions.details.timeEstimate}}</strong></p>
 	</div>
+
+
+	<!-- Consent Language Short -->
+	<div class="col-sm-6" ng-show="task.preview && tab==='instruct'" style="color:#5e5e5e; background-color:#fafafa">
+      <strong>CONSENT LANGUAGE PLACEHOLDER</strong>
+      <p>This task is part of research on image retrieval task design at the University of Illinois. The judgments you provide will help us in asking better questions in the future.</p>
+      <p><em>Details about this task, our research, and your rights as a participant are written below.</em></p>
+    </div>
+
+
+    <!-- Consent Language - Long -->
+	<div ng-show="tab==='info'" class="col-sm-12">
+      <strong>LONG CONSENT LANGUAGE PLACEHOLDER</strong>
+      <p>This task is part of research on image retrieval task design at the University of Illinois. The judgments you provide will help us in asking better questions in the future.</p>
+      <p><em>Details about this task, our research, and your rights as a participant are written below.</em></p>
+    </div>
+
+    <!-- Tips -->
+	<div ng-show="tab==='tips'" class="col-sm-12">
+      <p>TIP: pressing TAB will jump to the next input box.</p>
+    </div>
+
 </div>
 </section>

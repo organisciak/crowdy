@@ -1,22 +1,27 @@
 <ng-form name="itemForm">
     <div class="panel panel-default">
-      <div class="panel-body">
-	<div class="col-md-12">
-		<div class="form-group">
-		  <label>Describe this image with tags separated by commas.</label>
-		  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 500, blur: 0} }" 
-		  ng-model="item.tags" ng-pattern="/^.+\, ?./" placeholder="TAG" ng-list required>
-	  	</div>
-	  <div class="error-display" ng-show="turkForm.$submitted">
-		  <span ng-show="itemForm.$error.pattern">You need at least two tags. </span>
-		  <span ng-show="itemForm.$error.required">Need to enter tags. </span>
-		  
+	  <div class="panel-heading">
+		 Describe this image with 2 or more tags, separated by commas
 	  </div>
-	  <div class="tag-display" ng-show="item.tags">Your tags: <span class="bg-info item-tag" ng-repeat="tag in item.tags track by $index">{{tag}}</span></div>
-	</div>
-	<div class="col-md-12">
-		<img  class="img-responsive" ng-src="{{item.image236}}" alt="Test image" />
-	</div>
+	  
+      	<div class="panel-body">
+			<div class="form-group">
+			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 500, blur: 0} }" 
+			  ng-model="tags" ng-pattern="/^.+\, ?./" placeholder="TAG" ng-list required>
+			</div>
+			<div class="error-display" ng-show="turkForm.$submitted">
+				<span ng-show="itemForm.$error.pattern">You need at least two tags. </span>
+				<span ng-show="itemForm.$error.required">Need to enter tags. </span>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<img class="img-responsive" ng-src="{{item.image236}}" alt="Test image" />
+		</div>
+
+		<div class="tag-display panel-footer">
+		Your tags: <span class="bg-info item-tag" ng-repeat="tag in tags track by $index">{{tag}}</span>
+		</div>
       </div>
     </div>
 </ng-form>

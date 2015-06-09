@@ -1,9 +1,9 @@
-<tagging-instructions></tagging-instructions>
+<tagging-instructions ng-controller="instructionsController"></tagging-instructions>
 <br />
 
 <form name="turkForm" id="turkForm" method="POST" novalidate>
-<div class="row itemgrid" masonry>
-	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in task.items"></tag-item>
+<div class="row itemgrid" masonry reload-on-show>
+	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in items" ng-controller='tagTaskItemController'></tag-item>
 </div>
 
 <!-- START FEEDBACK -->
