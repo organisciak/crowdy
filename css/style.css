@@ -20,13 +20,18 @@ body {
 }
 
 span.item-tag {
-  padding: 5px;
-  margin: 2px 5px;
-  border: solid 1px steelblue;
-  border-radius: 4px;
-  display: inline-block;
+  padding: 2px;
+  margin: 2px 3px;
+  border-radius: 3px;
+  color: white;
+  background-color: steelblue;
 }
 
 .error-display {
   margin: 10px 0 10px 0;
 }
+
+/* Necessary for proper styling when an href is not present.
+See http://angular-ui.github.io/bootstrap/#/getting_started
+*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

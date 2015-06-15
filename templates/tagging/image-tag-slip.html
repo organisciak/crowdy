@@ -7,20 +7,20 @@
       	<div class="panel-body">
 			<div class="form-group">
 			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 500, blur: 0} }" 
-			  ng-model="tags" ng-pattern="/^.+\, ?./" placeholder="TAG" ng-list required>
+			  ng-model="tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" ng-list required>
 			</div>
 			<div class="error-display" ng-show="turkForm.$submitted">
-				<span ng-show="itemForm.$error.pattern">You need at least two tags. </span>
-				<span ng-show="itemForm.$error.required">Need to enter tags. </span>
+				<alert type='danger' ng-show="itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
+				<alert type='danger' ng-show="itemForm.$error.required">Need to enter tags. </alert>
 			</div>
-		</div>
-
-		<div class="col-md-12">
-			<img class="img-responsive" ng-src="{{item.image236}}" alt="Test image" />
+		
+			<div class="col-md-12">
+				<img class="img-responsive" ng-src="{{item.image236}}" alt="Test image" />
+			</div>
 		</div>
 
 		<div class="tag-display panel-footer">
-		Your tags: <span class="bg-info item-tag" ng-repeat="tag in tags track by $index">{{tag}}</span>
+		Your tags: <span class="item-tag" ng-repeat="tag in tags track by $index">{{tag}}</span>
 		</div>
       </div>
     </div>
