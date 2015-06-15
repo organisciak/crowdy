@@ -1,6 +1,6 @@
 (function(){
 
-var app = angular.module('crowdy-directives', []);
+var app = angular.module('crowdy.directives', []);
 
 app.directive("taggingInstructions", function() {
     return {
