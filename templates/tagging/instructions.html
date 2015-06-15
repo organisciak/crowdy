@@ -1,10 +1,8 @@
 <section>
     <h2>{{instructions.details.title}}</h2>
     <!-- START PREVIEW NOTICE -->
-    <section class="preview-notice" ng-if="task.preview">
-         <div class="row">
-        <h3 id="previewnotice" class="text-center col-lg-12 col-sm-12 col-12 text-danger">PREVIEWING NOTICE</h3>
-     </div>
+    <section class="preview-notice" ng-if="preview">
+     	<alert type="warning">You are previewing this task</alert>
      </section>
      <!-- END PREVIEW NOTICE -->
      <!-- WRAP THE REST OF TASK IN FORM -->
@@ -17,8 +15,8 @@
 
 <div class="row">
 	<!-- Main Instructions -->
-	<div ng-if="tab==='instruct'" ng-class="{'col-md-12': !task.preview, 'col-md-6': task.preview}">
-		<p>Label each of the images below with at least two tags. A tag is a short word or phrases describing what is in the image.</p>
+	<div ng-if="tab==='instruct'" ng-class="{'col-md-12': !preview, 'col-md-6': preview}">
+		<p>Label each of the images below with at least two tags. A tag is a short word or phrase describing what is in the image.</p>
 
 		<p> Good and interesting tags describe actions and objects in the image. e.g. "seagull", "running", "cats"</p>
 		<p>Bad tags don't describe what is in the image, describe things too generally (e.g. 'blue', 'person'), or describe things that are not the focus of the image (e.g. tagging an image of a surfer as "water").</p>
@@ -29,18 +27,29 @@
 
 
 	<!-- Consent Language Short -->
-	<div class="col-sm-6" ng-show="task.preview && tab==='instruct'" style="color:#5e5e5e; background-color:#fafafa">
-      <strong>CONSENT LANGUAGE PLACEHOLDER</strong>
-      <p>This task is part of research on image retrieval task design at the University of Illinois. The judgments you provide will help us in asking better questions in the future.</p>
-      <p><em>Details about this task, our research, and your rights as a participant are written below.</em></p>
+	<div class="col-sm-6" ng-show="preview && tab==='instruct'" style="color:#5e5e5e; background-color:#fafafa">
+		<p>You are invited to participate in this research study. Your decision to participate or decline participation in this study is completely voluntary and you have the right to terminate your participation at any time.</p>
+		<p>Your participation is be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues. We will make no efforts to identify you.</p>
+		<p>This study is conducted by <a tooltip="Phone:617-383-7674, Email:organis2@illinois.edu" href="mailto:organis2@illinois.edu" alt="email">Peter Organisciak</a> and advised by 
+		<a tooltip="Phone:217-265-0510, Email:twidale@illinois.edu" href="mailto:twidale@illinois.edu" alt="email">Michael Twidale</a> from the 
+		University of Illinois. Please contact us with any questions about this study. If you have any questions about your rights as a participant in 
+		this study or any concerns or complaints, please contact the University of Illinois 
+		<a tooltip="Phone:217-333-2670, Email:irb@illinois.edu" href="irb@illinois.edu">Institutional Review Board</a>.</p>
+		<p>Details are available in the <a ng-click="tab='info'">Study Info</a> tab.
     </div>
 
 
     <!-- Consent Language - Long -->
 	<div ng-show="tab==='info'" class="col-sm-12">
-      <strong>LONG CONSENT LANGUAGE PLACEHOLDER</strong>
-      <p>This task is part of research on image retrieval task design at the University of Illinois. The judgments you provide will help us in asking better questions in the future.</p>
-      <p><em>Details about this task, our research, and your rights as a participant are written below.</em></p>
+	<p>You are invited to participate in this research study on understanding task design in paid crowd settings. You will be asked to complete tasks related to online images. Your decision to participate or decline participation in this study is completely voluntary and you have the right to terminate your participation at any time.</p>
+	<p>This study will take approximately {{instructions.details.timeEstimate}} of your time, and you will be paid for performing the tasks as noted in the details above. Your participation in this research will be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues, such as published papers and a student thesis. We will make no efforts to identify you. There are no risks to individuals participating in this study beyond those that exist in daily life, and the judgments you provide will help requesters on paid crowd platforms design better tasks in the future.</p>
+	<p>This study is conducted by <a tooltip="Phone:617-383-7674, Email:organis2@illinois.edu" href="mailto:organis2@illinois.edu" alt="email">Peter Organisciak</a> 
+	and advised by <a tooltip="Phone:217-265-0510, Email:twidale@illinois.edu" href="mailto:twidale@illinois.edu" alt="email">Michael Twidale</a>. from the 
+	University of Illinois. Please contact Mr. Organisciak or Dr. Twidale with any questions about this study. If you have any questions about your rights 
+	as a participant in this study or any concerns or complaints, please contact the University of Illinois 
+	<a tooltip="Phone:217-333-2670, Email:irb@illinois.edu" href="irb@illinois.edu">Institutional Review Board</a>.</p>
+	<p>You may print a copy of this online consent form for your records, if you wish. By accepting and subsequently submitting any tasks, you indicate that you have read and understand the above consent information, certify that you are 18 years old or older, and indicate your willingness to voluntarily take part in the study.</p>
+
     </div>
 
     <!-- Tips -->
