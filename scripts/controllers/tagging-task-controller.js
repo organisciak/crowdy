@@ -5,12 +5,15 @@ angular.module('crowdy')
          function($http, $log, $scope, $rootScope, $routeParams) {
     var tasks;
     $scope.preview = $routeParams.preview;
+    $log.log($routeParams);
     
     $scope.type = "tagging";
     $scope.items = []; // Initialize empty, set when it's available
 
     $scope.submitForm = function() {
         $log.log($scope);
+        // Reload masonry, in case any errors pop up
+        $rootScope.$broadcast("masonry.reload");
     };
 
     $http.get("data/taggingSample100.json").success(function(data){
