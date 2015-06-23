@@ -1,7 +1,15 @@
 <div class="col-lg-8">
 	<h4>Optional</h4>
-	<div class="form-group">
+	<div class="form-group col-sm-12 col-md-6">
 		<label for="feedback">Do you have any comments, thoughts, or feedback?</label>
-		<textarea name="feedback" class="form-control" placeholder="Text input" ng-model="task.feedback"></textarea>
+		<textarea name="feedback" class="form-control" placeholder="Text input" ng-model="taskset.feedback.form"></textarea>
+	</div><div class="form-group col-sm-6 col-md-6">	
+		<label for="satisfaction">How satisfied are you with this task?</label><br/>
+		<rating name="satisfaction" ng-model="taskset.feedback.satisfaction" max="5" on-hover="message1=getMsg(value, 'satisfy')" on-leave="message1 = null"></rating>
+		<span>{{message1}}</span>
+	</div><div class="form-group col-sm-6 col-md-6">	
+		<label for="payment">How satisfied are you with the payment?</label><br/>
+		<rating name="payment" ng-model="taskset.feedback.pay" max="5" on-hover="message2=getMsg(value, 'pay')" on-leave="message2 = null"></rating>
+		<span>{{message2}}</span>
 	</div>
 </div>

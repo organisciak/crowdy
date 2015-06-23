@@ -3,18 +3,24 @@
 
 <form name="turkForm" id="turkForm" method="POST" novalidate>
 <div class="row itemgrid" masonry reload-on-show>
-	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in items" ng-controller='tagTaskItemController'></tag-item>
+	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></tag-item>
 </div>
 
 <!-- START FEEDBACK -->
-<div class="row">
-    <feedback-form></feedback-form> 
+<div class="row" ng-show="!preview">
+    <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
 </div>
 <!-- END FEEDBACK -->
 <!-- START SUBMIT -->
 <div class="row">
+	<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
  <input type="hidden" name="assignmentId" id="myAssignmentId" value="" />
- <input id="submitButton" type="submit" name="submit" ng-click="submitForm()" class="btn btn-primary" value="Submit" />
+ <input id="submitButton" type="submit" name="submit" 
+ ng-click="submitForm()" class="btn btn-primary" 
+ ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
+ ng-value="preview ? 'Previewing' : 'Submit'" />
+</div>
+ <strong ng-show="debug">DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre>
 </div>
 <!-- END SUBMIT-->
 </form>

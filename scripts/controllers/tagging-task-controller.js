@@ -20,6 +20,7 @@ angular.module('crowdy')
         animation: true,
         templateUrl: 'templates/modal.html',
         controller: 'ModalInstanceCtrl',
+        backdrop: 'static',
         size: 'lg',
         resolve: {
           opts: function () {
@@ -34,8 +35,6 @@ angular.module('crowdy')
     };
 
     $scope.submitForm = function() {
-        $log.log($scope);
-        
         if ($scope.turkForm.$valid) {
           // Submit form toServer
           $http.post("http://localhost:3000/save/hit", $scope.taskset)
@@ -61,11 +60,11 @@ angular.module('crowdy')
     $http.jsonp("http://localhost:3000/hit", {params:params}).success(function(data){
         $scope.taskset = data.taskset;
         if ($scope.taskset.tasks.length === 0) {
-          $scope.error = "No tasks";
+          $rootScope.error = "No tasks";
           $scope.openModal({
-            show: { ok: true},
+            show: { ok: false},
             title: "Out of tasks :(",
-            message: "Sorry, we ran out of tasks that are available at the moment.<br/>We're really sorry about that, we know that sucks."
+            message: "Sorry, we ran out of tasks that are available at the moment.<br/>We're really sorry about that, we know it sucks."
           });
         }
     }).error(function(err){
@@ -77,6 +76,7 @@ angular.module('crowdy')
  .controller("tagTaskItemController", ['$http', '$log', '$scope', '$rootScope', '$routeParams', 
          function($http, $log, $scope, $rootScope, $routeParams) {
         // Individual Item Controller
+
         $scope.$watch('tags', function(newValue, oldValue){
           // Only refresh masonry is the value actually changed
           // This also keeps from running on page load
@@ -84,6 +84,38 @@ angular.module('crowdy')
             $rootScope.$broadcast("masonry.reload");
           }
         });
+
+         $scope.tooltip = function(item){
+           return "<em>Title: </em><strong>"+item.meta.title+"</strong><br/><em>Description: </em>"+item.meta.description
+         }
+         
+        // Individual item timer
+        $scope.timeStart = function(item){
+          if (!item.timing) {
+          item.timing = new Date();
+          }
+        }
+
+        $scope.timeStop = function(item){
+          if (item.timing) {
+            timeInFocus = (new Date()-item.timing)/1000;
+            item.timeSpent += timeInFocus;
+            delete item.timing;
+          }
+        }
+
+  }])
+
+  .controller("feedbackCtrl", ['$scope', function($scope) {
+    $scope.message1 = "";
+    
+    $scope.getMsg = function(n, cond){
+        responses = {
+        satisfy: ["I hated it.", "I didn't like it", "It was OK", "It was great", "I loved it"],
+        pay: ["Way too low.", "Lower than I'd like", "It was OK", "Better than usual", "Much better than usual"]
+        };
+        return responses[cond][n-1];
+      };
 
   }]);
 

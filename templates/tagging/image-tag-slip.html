@@ -6,8 +6,10 @@
 	  
       	<div class="panel-body">
 			<div class="form-group">
-			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 500, blur: 0} }" 
-			  ng-model="tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" ng-list required>
+			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }" 
+			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
+			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
+			  ng-list required>
 			</div>
 			<div class="error-display" ng-show="turkForm.$submitted">
 				<alert type='danger' ng-show="itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
@@ -15,12 +17,13 @@
 			</div>
 		
 			<div class="col-md-12">
-				<img class="img-responsive" ng-src="{{item.image236}}" alt="Test image" />
+				<img class="img-responsive" ng-src="{{item.meta.image['236']}}" ng-alt="{{item.meta.title}}"
+				tooltip-html="tooltip(item)" tooltip-placement="bottom" />
 			</div>
 		</div>
 
 		<div class="tag-display panel-footer">
-		Your tags: <span class="item-tag" ng-repeat="tag in tags track by $index">{{tag}}</span>
+		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
 		</div>
       </div>
     </div>
