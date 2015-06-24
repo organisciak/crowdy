@@ -5,9 +5,6 @@ angular.module('crowdy')
          function($http, $log, $modal, $scope, $rootScope, $routeParams) {
 
     $scope.preview = $routeParams.preview ? true : false;
-    //
-    // TODO ERROR HANDLING: verify necessary params (hit_id, )
-    //
     
     $scope.type = "tagging";
     $scope.taskset = {}; 
@@ -38,14 +35,38 @@ angular.module('crowdy')
         if ($scope.turkForm.$valid) {
           // Submit form toServer
           $http.post("http://localhost:3000/save/hit", $scope.taskset)
-            .success(function(res){$log.log(res)})
-            .error(function(err){$log.error(err)});
+            .success(function(res){
+                $log.log(res);
+                PostResultsToAmazon(res, null);
+            })
+            .error(function(err){
+                // Still send results to amazon in case of error
+                $log.error(err);
+                PostResultsToAmazon($scope.taskset, res);
+            });
           // Submit form back to Amazon
         } else {
           // Reload masonry, in case any errors pop up
           $rootScope.$broadcast("masonry.reload");
         }
 
+    };
+
+    PostResultsToAmazon = function(results, errors){
+        if (!$routeParams.turkSubmitTo){
+            $log.log("Not submitting to Turk.");
+            return;
+        }
+        resstr = JSON.stringify(results);
+        errstr = JSON.stringify(errors);
+        params = {
+            results: resstr,
+            errors : errstr,
+            assignmentId: $routeParams.assignmentId,
+            hitId : $routeParams.hitId,
+            workerId : $routeParams.workerId
+        };
+        $http.post($routeParams.turkSubmitTo, params);
     };
 
     // Construct JSON callback
