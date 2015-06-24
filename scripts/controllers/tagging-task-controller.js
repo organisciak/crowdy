@@ -4,6 +4,8 @@ angular.module('crowdy')
  .controller("tagTaskController", ['$http', '$log', '$modal', '$scope', '$rootScope', '$routeParams', 
          function($http, $log, $modal, $scope, $rootScope, $routeParams) {
 
+    var BACKEND_SERVER = "."; // e.g. http://localhost:3000
+
     $scope.preview = $routeParams.preview ? true : false;
     
     $scope.type = "tagging";
@@ -34,7 +36,7 @@ angular.module('crowdy')
     $scope.submitForm = function() {
         if ($scope.turkForm.$valid) {
           // Submit form toServer
-          $http.post("http://localhost:3000/save/hit", $scope.taskset)
+          $http.post(BACKEND_SERVER+"/save/hit", $scope.taskset)
             .success(function(res){
                 $log.log(res);
                 PostResultsToAmazon(res, null);
@@ -78,7 +80,7 @@ angular.module('crowdy')
       lock: !$scope.preview
     };
 
-    $http.jsonp("http://localhost:3000/hit", {params:params}).success(function(data){
+    $http.jsonp(BACKEND_SERVER + "/hit", {params:params}).success(function(data){
         $scope.taskset = data.taskset;
         if ($scope.taskset.tasks.length === 0) {
           $rootScope.error = "No tasks";
