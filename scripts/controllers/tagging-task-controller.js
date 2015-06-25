@@ -1,12 +1,14 @@
 (function(){
 
 angular.module('crowdy')
- .controller("tagTaskController", ['$http', '$log', '$modal', '$scope', '$rootScope', '$routeParams', 
-         function($http, $log, $modal, $scope, $rootScope, $routeParams) {
+ .controller("tagTaskController", ['$http', '$sce', '$httpParamSerializerJQLike', '$log', '$modal', '$scope', '$rootScope', '$routeParams', 
+         function($http, $sce, $httpParamSerializerJQLike, $log, $modal, $scope, $rootScope, $routeParams) {
 
     var BACKEND_SERVER = "."; // e.g. http://localhost:3000
 
-    $scope.preview = $routeParams.preview ? true : false;
+    $scope.preview = ($routeParams.assignmentId === 'ASSIGNMENT_ID_NOT_AVAILABLE' );
+    $scope.formSubmitTo = $sce.trustAsResourceUrl($routeParams.turkSubmitTo + "/mturk/externalSubmit");
+    $scope.assignmentId = $routeParams.assignmentId;
     
     $scope.type = "tagging";
     $scope.taskset = {}; 
@@ -33,7 +35,7 @@ angular.module('crowdy')
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };
 
-    $scope.submitForm = function() {
+    $scope.submitForm = function($event) {
         if ($scope.turkForm.$valid) {
           // Submit form toServer
           $http.post(BACKEND_SERVER+"/save/hit", $scope.taskset)
@@ -55,29 +57,22 @@ angular.module('crowdy')
     };
 
     PostResultsToAmazon = function(results, errors){
-        if (!$routeParams.turkSubmitTo){
-            $log.log("Not submitting to Turk.");
-            return;
-        }
-        resstr = JSON.stringify(results);
-        errstr = JSON.stringify(errors);
-        params = {
-            results: resstr,
-            errors : errstr,
-            assignmentId: $routeParams.assignmentId,
-            hitId : $routeParams.hitId,
-            workerId : $routeParams.workerId
-        };
-        $http.post($routeParams.turkSubmitTo, params);
+        $scope.hiddenErrors = errors;
+        // Add an action to the main form.
+        // It couldn't be there before because of interference with our submit method.
+        // MTurk requires a post from the client, though.
+        angular.element("#turkHiddenForm").submit();
+        return;
     };
 
     // Construct JSON callback
     params = {
       callback: "JSON_CALLBACK",
-      user: $scope.preview ? "PREVIEWUSER" : $routeParams.WorkerId,
-      taskset_id:$scope.preview ? "TEST" : $routeParams.HITId,
+      user: $scope.preview ? "PREVIEWUSER" : $routeParams.workerId,
+      taskset_id:$scope.preview ? "TEST" : $routeParams.hitId,
       hit_id: $routeParams.hit_id,
-      lock: !$scope.preview
+      assignment_id: $routeParams.assignment_id,
+      lock: !($scope.preview)
     };
 
     $http.jsonp(BACKEND_SERVER + "/hit", {params:params}).success(function(data){

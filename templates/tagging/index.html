@@ -1,7 +1,7 @@
 <tagging-instructions ng-controller="instructionsController"></tagging-instructions>
 <br />
 
-<form name="turkForm" id="turkForm" method="POST" novalidate>
+<form name="turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
 <div class="row itemgrid" masonry reload-on-show>
 	<tag-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></tag-item>
 </div>
@@ -14,13 +14,19 @@
 <!-- START SUBMIT -->
 <div class="row">
 	<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
- <input type="hidden" name="assignmentId" id="myAssignmentId" value="" />
+	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
- ng-click="submitForm()" class="btn btn-primary" 
+ class="btn btn-primary" 
  ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
  ng-value="preview ? 'Previewing' : 'Submit'" />
 </div>
- <strong ng-show="debug">DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre>
+<span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
 </div>
 <!-- END SUBMIT-->
+</form>
+
+<!-- TURK SUBMISSION FORM, because ng-submit and action don't mix -->
+<form name='turkHiddenForm' method="POST" id='turkHiddenForm' action={{formSubmitTo}}>
+<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
+<input type="hidden" name="test" value="{{ taskset | json }}" />
 </form>
