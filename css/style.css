@@ -1,3 +1,16 @@
+.instructions {
+    font-size:12px;
+}
+.short-irb {
+    font-size:10px;
+    color: #5e5e5e;
+    background-color:#fafafa;
+}
+
+h2 {
+   font-size:24px;
+}
+
 .ng-invalid.ng-dirty {
     border-color: red;
 }
