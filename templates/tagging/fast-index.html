@@ -1,0 +1,42 @@
+<form name="turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
+
+<carousel>
+<slide>
+	<tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
+</slide>
+
+<slide ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'>
+	<tag-item class="col-md-12 col-sm-12 col-xs-12" ></tag-item>
+</slide>
+
+<!-- START FEEDBACK -->
+<slide>
+	<div class="row" ng-show="!preview">
+		<feedback-form ng-controller='feedbackCtrl'></feedback-form> 
+	</div>
+
+<!-- END FEEDBACK -->
+
+	<!-- START SUBMIT -->
+	<div class="row">
+		<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
+		<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
+
+		 <input id="submitButton" type="submit" name="submit" 
+		 class="btn btn-primary" 
+		 ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
+		 ng-value="preview ? 'Previewing' : 'Submit'" />
+	</div>
+</slide>
+</carousel>
+
+<span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
+</div>
+<!-- END SUBMIT-->
+</form>
+
+<!-- TURK SUBMISSION FORM, because ng-submit and action don't mix -->
+<form name='turkHiddenForm' method="POST" id='turkHiddenForm' action={{formSubmitTo}}>
+<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
+<input type="hidden" name="test" value="{{ taskset | json }}" />
+</form>
