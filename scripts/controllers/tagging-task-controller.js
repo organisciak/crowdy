@@ -9,6 +9,8 @@ angular.module('crowdy')
     $scope.preview = ($routeParams.assignmentId === 'ASSIGNMENT_ID_NOT_AVAILABLE' );
     $scope.formSubmitTo = $sce.trustAsResourceUrl($routeParams.turkSubmitTo + "/mturk/externalSubmit");
     $scope.assignmentId = $routeParams.assignmentId;
+
+    $rootScope.debug = $routeParams.debug;
     
     $scope.type = "tagging";
     $scope.taskset = {}; 
@@ -75,7 +77,24 @@ angular.module('crowdy')
       lock: !($scope.preview)
     };
 
-    $http.jsonp(BACKEND_SERVER + "/hit", {params:params}).success(function(data){
+    var endpoint;
+    if ($rootScope.debug) {
+        endpoint = 'data/debug-image-hit.json';
+       } else {
+        endpoint = BACKEND_SERVER + "/hit";
+       }
+    
+    $http.jsonp(endpoint, {params:params})
+     .success(function(data){
+        if (data.status && data.status===500){
+            $rootScope.error = true;
+            $scope.openModal({
+                show: { ok: false},
+                title: "Error",
+                message: data.message
+              });
+            return;
+        }
         $scope.taskset = data.taskset;
         if ($scope.taskset.tasks.length === 0) {
           $rootScope.error = "No tasks";
@@ -86,7 +105,21 @@ angular.module('crowdy')
           });
         }
     }).error(function(err){
-        $scope.error = "Unknown error";
+        $rootScope.error = true;
+        console.log(err);
+        var msg, title;
+        if (data.message){
+            title = "Error";
+            msg = data.message;
+        } else {
+            title = "Unknown error.";
+            msg = "Sorry, an unknown error occurred. We don't know what happened";
+        }
+        $scope.openModal({
+            show: {ok:false},
+            title: title,
+            message: msg
+        });
     });
 
   }])
