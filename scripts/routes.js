@@ -2,8 +2,13 @@
 
 angular.module('crowdy')
     .config(function($routeProvider){
-        $routeProvider.when('/tag', {
-            templateUrl: '/templates/tagging/index.html',
+        $routeProvider.when('/tag/basic', {
+            templateUrl: '/templates/tagging/basic-index.html',
+            controller:'tagTaskController',
+            controllerAs: 'task'
+        })
+        $routeProvider.when('/tag/fast', {
+            templateUrl: '/templates/tagging/fast-index.html',
             controller:'tagTaskController',
             controllerAs: 'task'
         })
@@ -16,7 +21,7 @@ angular.module('crowdy')
             templateUrl: 'templates/relevance/index.html'
         })
     .otherwise({
-        redirectTo: '/tag'
+        redirectTo: '/tag/basic'
     });
     
     
