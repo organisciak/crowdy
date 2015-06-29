@@ -67,7 +67,7 @@ app.directive("likeRating", function(){
 var taskDetails = {
     title: "Assign word labels ('tags') to describe images",
     preview: false,
-    timeEstimate: "1 min"
+    timeEstimate: "3.5 minutes"
 };
 
 
