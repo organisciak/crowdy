@@ -1,0 +1,32 @@
+<ng-form name="itemForm">
+    <div class="panel panel-default">
+	  <div class="panel-heading">
+		 Describe this image with 2 or more tags, separated by commas
+	  </div>
+	  
+      	<div class="panel-body">
+			<div class="error-display" ng-show="turkForm.$submitted">
+				<alert type='danger' ng-show="itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
+				<alert type='danger' ng-show="itemForm.$error.required">Need to enter tags. </alert>
+			</div>
+		
+			<div class="col-md-12">
+				<img class="img-responsive" ng-src="{{item.meta.image['236']}}" ng-alt="{{item.meta.title}}"
+				tooltip-html="tooltip(item)" tooltip-placement="bottom" />
+			</div>
+
+			<div class="form-group">
+			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }" 
+			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
+			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
+			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
+			  ng-list required>
+			</div>
+		</div>
+
+		<div class="tag-display panel-footer">
+		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
+		</div>
+      </div>
+    </div>
+</ng-form>

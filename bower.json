@@ -1,0 +1,18 @@
+{
+  "name": "crowdy",
+  "description": "Design microtask projects",
+  "version": "0.0.0",
+  "homepage": "https://github.com/organisciak/crowdy",
+  "license": "Apache",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.1",
+    "bootstrap": "~3.1.1",
+    "angular-route": "1.4.1",
+    "angular-masonry": "~0.11.0",
+    "jquery-bridget": "~1.1.0",
+    "underscore": "~1.8.3",
+    "angular-bootstrap": "~0.13.0",
+    "angular-sanitize": "1.4.1"
+  }
+}

@@ -1,0 +1,50 @@
+.instructions {
+    font-size:12px;
+}
+.short-irb {
+    font-size:10px;
+    color: #5e5e5e;
+    background-color:#fafafa;
+}
+
+h2 {
+   font-size:24px;
+}
+
+.ng-invalid.ng-dirty {
+    border-color: red;
+}
+.ng-valid.ng-dirty {
+    border-color: green;
+}
+
+
+body {
+    margin-top: 1em;
+}
+
+.masonry-brick {
+    #margin: 1em;
+    display: none;
+}
+
+.masonry-brick.loaded {
+    display: block;
+}
+
+span.item-tag {
+  padding: 2px;
+  margin: 2px 3px;
+  border-radius: 3px;
+  color: white;
+  background-color: steelblue;
+}
+
+.error-display {
+  margin: 10px 0 10px 0;
+}
+
+/* Necessary for proper styling when an href is not present.
+See http://angular-ui.github.io/bootstrap/#/getting_started
+*/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
