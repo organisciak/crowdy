@@ -42,12 +42,11 @@ angular.module('crowdy')
           // Submit form toServer
           $http.post(BACKEND_SERVER+"/save/hit", $scope.taskset)
             .success(function(res){
-                $log.log(res);
                 PostResultsToAmazon(res, null);
             })
             .error(function(err){
                 // Still send results to amazon in case of error
-                $log.error(err);
+                res.err = err;
                 PostResultsToAmazon($scope.taskset, res);
             });
           // Submit form back to Amazon
@@ -106,7 +105,6 @@ angular.module('crowdy')
         }
     }).error(function(err){
         $rootScope.error = true;
-        console.log(err);
         var msg, title;
         if (data.message){
             title = "Error";
