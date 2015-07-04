@@ -1,34 +1,33 @@
 <form name="turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
 
-<carousel class="fast-carousel">
-<slide>
-	<tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
-</slide>
 
-<slide ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'>
-	<tag-item class="col-md-12 col-sm-12 col-xs-12" ></tag-item>
-</slide>
+<tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
+<a ng-click="pushStagedTask()">Push Task</a>
+<div class="row itemgrid">
+	<tag-item ng-show="$last" class="col-md-12 col-sm-12 col-xs-12" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></tag-item>
+</div>
+
 
 <!-- START FEEDBACK -->
-<slide>
-	<div class="row" ng-show="!preview">
-		<feedback-form ng-controller='feedbackCtrl'></feedback-form> 
-	</div>
+<div class="row" ng-show="!preview">
+    <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
+</div>
 
 <!-- END FEEDBACK -->
 
-	<!-- START SUBMIT -->
-	<div class="row">
-		<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
-		<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
-
-		 <input id="submitButton" type="submit" name="submit" 
-		 class="btn btn-primary" 
-		 ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
-		 ng-value="preview ? 'Previewing' : 'Submit'" />
-	</div>
-</slide>
-</carousel>
+<!-- START SUBMIT -->
+<div class="row">
+	<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
+	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
+ <input id="submitButton" type="submit" name="submit" 
+ class="btn btn-primary" 
+ ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
+ ng-value="preview ? 'Previewing' : 'Submit'" />
+</div>
+<span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
+</div>
+<!-- END SUBMIT-->
+</form>
 
 <span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
 </div>
