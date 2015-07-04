@@ -13,7 +13,8 @@ module.exports = function (grunt) {
         concat: {
             options: {
                 banner: '<%= banner %>',
-                stripBanners: true
+                stripBanners: true,
+                separator: ';\n'
             },
             dist: {
                 src: [
@@ -29,7 +30,8 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                banner: '<%= banner %>'
+                banner: '<%= banner %>',
+                beautify: true
             },
             dist: {
                 src: '<%= concat.dist.dest %>',
@@ -64,7 +66,11 @@ module.exports = function (grunt) {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
-            }
+            },
+            autobuild: {
+                files: '<%= concat.dist.src %>',
+                tasks: ['jshint', 'concat', 'uglify']
+                }
         }
     });
 
