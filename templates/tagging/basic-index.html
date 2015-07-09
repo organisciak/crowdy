@@ -13,11 +13,11 @@
 <!-- END FEEDBACK -->
 <!-- START SUBMIT -->
 <div class="row">
-	<alert type='warning' ng-show="turkForm.$submitted && !turkForm.$valid"> Sorry but {{turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
+	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
  class="btn btn-primary" 
- ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
+ ng-disabled="(forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview" 
  ng-value="preview ? 'Previewing' : 'Submit'" />
 </div>
 <span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>

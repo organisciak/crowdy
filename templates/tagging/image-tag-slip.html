@@ -1,14 +1,14 @@
-<ng-form name="itemForm">
+<ng-form name="forms.itemForm">
     <div class="panel panel-default">
 	  <div class="panel-heading">
 		 Describe this image with 2 or more tags, separated by commas
 	  </div>
 	  
       	<div class="panel-body">
-			<div class="error-display" ng-show="turkForm.$submitted || (condition === 'fast' && itemForm.$dirty && turkForm.check)">
-				<alert type='danger' ng-show="itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
-				<alert type='danger' ng-show="itemForm.$error.required">Need to enter tags. </alert>
-				<alert type='info' ng-show="condition === 'fast' && itemForm.$valid">Great! Hit enter to continue when you're done!</alert>
+			<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForm.$dirty && forms.turkForm.check)">
+				<alert type='danger' ng-show="forms.itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
+				<alert type='danger' ng-show="forms.itemForm.$error.required">Need to enter tags. </alert>
+				<alert type='info' ng-show="condition === 'fast' && forms.itemForm.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
 			<div class="col-md-12">
@@ -21,6 +21,7 @@
 			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
+				ng-keypress = "pressEnter($event)"
 			  ng-list required>
 			</div>
 		</div>
