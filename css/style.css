@@ -1,3 +1,6 @@
+.half-opacity {
+  opacity: 0.7;
+}
 .instructions {
     font-size:12px;
 }
@@ -5,6 +8,11 @@
     font-size:10px;
     color: #5e5e5e;
     background-color:#fafafa;
+}
+
+.timer {
+  font-weight:bold;
+  font-size:larger;
 }
 
 .carousel-control.left, .carousel-control.right, .carousel-indicators {

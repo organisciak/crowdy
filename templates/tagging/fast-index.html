@@ -1,10 +1,19 @@
-<form name="turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
-
+<form name="turkForm" id="turkForm" method="POST" novalidate>
 
 <tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
 <a ng-click="pushStagedTask()">Push Task</a>
+
+<div panel panel-default ng-show="phase === 'instructions'">
+Are you ready to start? Remember, you have <span class="timer">60</span> seconds.
+<button type="button" class="btn btn-primary" ng-click="nextPhase()">START</button>
+</div>
+
 <div class="row itemgrid">
-	<tag-item ng-show="$last" class="col-md-12 col-sm-12 col-xs-12" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></tag-item>
+	<tag-item ng-show="$last" 
+		class="col-md-12 col-sm-12 col-xs-12" 
+		ng-class="{'half-opacity':condition==='fast' && phase !=='tasks'}"
+		ng-repeat="item in taskset.tasks" 
+		ng-controller='tagTaskItemController'></tag-item>
 </div>
 
 
@@ -21,6 +30,7 @@
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
  class="btn btn-primary" 
+ ng-click="submitForm($event)"
  ng-disabled="(turkForm.$submitted && !turkForm.$valid || !!($root.error)) || preview" 
  ng-value="preview ? 'Previewing' : 'Submit'" />
 </div>
