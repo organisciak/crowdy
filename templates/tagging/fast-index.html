@@ -1,4 +1,4 @@
-<form name="turkForm" id="turkForm" method="POST" novalidate>
+<form name="forms.turkForm" method="POST" novalidate>
 
 <tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
 <a ng-click="pushStagedTask()">Push Task</a>
@@ -45,7 +45,7 @@ Are you ready to start? Remember, you have <span class="timer">60</span> seconds
 </form>
 
 <!-- TURK SUBMISSION FORM, because ng-submit and action don't mix -->
-<form name='turkHiddenForm' method="POST" id='turkHiddenForm' action={{formSubmitTo}}>
+<form name='forms.turkHiddenForm' method="POST" id='turkHiddenForm' action={{formSubmitTo}}>
 <input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
 <input type="hidden" name="test" value="{{ taskset | json }}" />
 </form>
