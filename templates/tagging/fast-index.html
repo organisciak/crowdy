@@ -1,15 +1,23 @@
 <form name="forms.turkForm" method="POST" novalidate>
 
 <tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
-<a ng-click="pushStagedTask()">Push Task</a>
 
-<div panel panel-default ng-show="phase === 'instructions'">
-Are you ready to start? Remember, you have <span class="timer">60</span> seconds.
-<button type="button" class="btn btn-primary" ng-click="nextPhase()">START</button>
+<div class="panel panel-default">
+	<p ng-show="phase==='instructions'">
+		<span ng-show="phase==='instructions'">Are you ready to start?</span>
+		Remember, you have <span class="timer">{{time.timeLeft}}</span> seconds.
+		<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
+	</p>
+	<p ng-show="phase==='tasks'">
+		You have <span class="timer">{{time.timeLeft}}</span> seconds.
+	</p>
+	<div ng-show="phase==='feedback'">
+		<h2>Time Done! You tagged {{taskset.tasks.length}} items!</h2>
+	</div>
 </div>
 
 <div class="row itemgrid">
-	<tag-item ng-show="$last" 
+	<tag-item ng-show="$last && (phase === 'instructions' || phase === 'tasks')" 
 		class="col-md-12 col-sm-12 col-xs-12" 
 		ng-class="{'half-opacity':condition==='fast' && phase !=='tasks'}"
 		ng-repeat="item in taskset.tasks" 
@@ -18,7 +26,7 @@ Are you ready to start? Remember, you have <span class="timer">60</span> seconds
 
 
 <!-- START FEEDBACK -->
-<div class="row" ng-show="!preview">
+<div class="row" ng-show="!preview && phase === 'feedback'">
     <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
 </div>
 
