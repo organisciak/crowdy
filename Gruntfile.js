@@ -73,7 +73,13 @@ module.exports = function (grunt) {
                 files: '<%= concat.dist.src %>',
                 tasks: ['jshint', 'concat', 'uglify']
                 }
-        }
+        },
+        githooks: {
+            all: {
+                'pre-commit': 'jshint',
+                'pre-push': 'concat uglify'
+            }
+        },
     });
 
     // These plugins provide necessary tasks
@@ -81,6 +87,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-githooks');
 
     // Default task
     grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
