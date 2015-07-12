@@ -33,9 +33,10 @@
 <!-- END FEEDBACK -->
 
 <!-- START SUBMIT -->
-<div class="row">
+<div class="row" ng-show="condition !== 'fast'">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
+</div><div class="row">
  <input id="submitButton" type="submit" name="submit" 
  class="btn btn-primary" 
  ng-click="submitForm($event)"
