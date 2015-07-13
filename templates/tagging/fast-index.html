@@ -40,7 +40,7 @@
  <input id="submitButton" type="submit" name="submit" 
  class="btn btn-primary" 
  ng-click="submitForm($event)"
- ng-disabled="(forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview" 
+ ng-disabled="(forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (condition === 'fast' && phase !== 'feedback')" 
  ng-value="preview ? 'Previewing' : 'Submit'" />
 </div>
 <span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
