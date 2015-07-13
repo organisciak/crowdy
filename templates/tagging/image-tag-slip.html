@@ -19,6 +19,7 @@
 			<div class="form-group">
 			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }"
 			  name="contrib" 
+			  focus-me="{{condition === 'fast' && phase === 'tasks'}}"
 			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
