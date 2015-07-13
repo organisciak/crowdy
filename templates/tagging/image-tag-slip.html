@@ -1,14 +1,14 @@
-<ng-form name="forms.itemForm">
+<ng-form name="forms.itemForms.item_{{$index}}">
     <div class="panel panel-default">
 	  <div class="panel-heading">
-		 Describe this image with 2 or more tags, separated by commas
+		 Describe this image with 2 or more tags, separated by commas {{itemIndex}}
 	  </div>
 	  
       	<div class="panel-body">
-			<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForm.$dirty && forms.turkForm.check)">
-				<alert type='danger' ng-show="forms.itemForm.$error.pattern">You need at least <strong>two</strong> tags. </alert>
-				<alert type='danger' ng-show="forms.itemForm.$error.required">Need to enter tags. </alert>
-				<alert type='info' ng-show="condition === 'fast' && forms.itemForm.$valid">Great! Hit enter to continue when you're done!</alert>
+			<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForms.item_{{$index}}.$dirty && forms.turkForm.check)">
+				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.pattern">You need at least <strong>two</strong> tags. </alert>
+				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to enter tags. </alert>
+				<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
 			<div class="col-md-12">
@@ -17,7 +17,8 @@
 			</div>
 
 			<div class="form-group">
-			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }" 
+			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }"
+			  name="contrib" 
 			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
