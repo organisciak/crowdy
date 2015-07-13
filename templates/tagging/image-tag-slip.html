@@ -23,6 +23,7 @@
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
 				ng-keypress = "pressEnter($event)"
+				ng-disabled = "(condition === 'fast' && phase !== 'tasks')"
 			  ng-list required>
 			</div>
 		</div>
