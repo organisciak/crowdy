@@ -29,8 +29,11 @@
 			</div>
 		</div>
 
-		<div class="tag-display panel-footer">
+		<div ng-show="condition !== 'fast'" class="tag-display panel-footer">
 		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
+		</div>
+		<div ng-show="condition === 'fast'" class="tag-display panel-footer">
+		{{time.timeLeft}} seconds left. {{taskset.tasks.length - forms.turkForm.$error.pattern.length - forms.turkForm.$error.required.length}} tasks completed.
 		</div>
       </div>
     </div>
