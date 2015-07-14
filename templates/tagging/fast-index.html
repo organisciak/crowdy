@@ -6,11 +6,11 @@
 	<div class="panel-body">
 		<p ng-show="phase==='instructions'">
 			<span ng-show="phase==='instructions'">Are you ready to start?</span>
-			Remember, you have <span class="timer">{{time.timeLeft}}</span> seconds.
+			Remember, you have <span class="timer">{{time.left}}</span> seconds.
 			<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
 		</p>
 		<p ng-show="phase==='tasks'">
-			You have <span class="timer">{{time.timeLeft}}</span> seconds.
+			You have <span class="timer">{{time.left}}</span> seconds.
 		</p>
 		<div ng-show="phase==='feedback'">
 			<h2>Time Done! You tagged {{taskset.tasks.length}} items!</h2>
