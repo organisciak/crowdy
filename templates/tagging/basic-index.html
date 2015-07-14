@@ -13,7 +13,7 @@
 <!-- END FEEDBACK -->
 <!-- START SUBMIT -->
 <div class="row">
-	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
+	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
  class="btn btn-primary" 

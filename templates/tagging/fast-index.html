@@ -3,16 +3,18 @@
 <tagging-instructions class="instructions" ng-controller="instructionsController"></tagging-instructions>
 
 <div class="panel panel-default">
-	<p ng-show="phase==='instructions'">
-		<span ng-show="phase==='instructions'">Are you ready to start?</span>
-		Remember, you have <span class="timer">{{time.timeLeft}}</span> seconds.
-		<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
-	</p>
-	<p ng-show="phase==='tasks'">
-		You have <span class="timer">{{time.timeLeft}}</span> seconds.
-	</p>
-	<div ng-show="phase==='feedback'">
-		<h2>Time Done! You tagged {{taskset.tasks.length}} items!</h2>
+	<div class="panel-body">
+		<p ng-show="phase==='instructions'">
+			<span ng-show="phase==='instructions'">Are you ready to start?</span>
+			Remember, you have <span class="timer">{{time.timeLeft}}</span> seconds.
+			<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
+		</p>
+		<p ng-show="phase==='tasks'">
+			You have <span class="timer">{{time.timeLeft}}</span> seconds.
+		</p>
+		<div ng-show="phase==='feedback'">
+			<h2>Time Done! You tagged {{taskset.tasks.length}} items!</h2>
+		</div>
 	</div>
 </div>
 
@@ -34,7 +36,7 @@
 
 <!-- START SUBMIT -->
 <div class="row" ng-show="condition !== 'fast'">
-	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
+	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
 </div><div class="row">
  <input id="submitButton" type="submit" name="submit" 
