@@ -13,8 +13,8 @@
 			You have <span class="timer">{{time.left}}</span> seconds.
 		</p>
 		<div ng-show="phase==='feedback'">
-			<h2>Time Done! You tagged {{taskset.tasks.length}} items and earned {{taskset.payment | currency : $}<span ng-show="taskset.bonus">plus {{ taskset.bonus | currency : $}} in bonuses.*</span></h2>
-			<p>*Bonuses are paid after your contributions are verified</p>
+			<h2>Time Done! You tagged {{taskset.tasks.length}} items and earned {{taskset.payment | currency : $}}<span ng-show="taskset.bonus"> plus {{ taskset.bonus | currency : $}} in bonuses.*</span></h2>
+			<p ng-show='taskset.bonus'>*Bonuses are paid after your contributions are verified</p>
 		</div>
 	</div>
 </div>
