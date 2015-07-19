@@ -17,7 +17,7 @@
 		<p><strong>Good</strong> and interesting tags describe <a tooltip="For example: 'running', 'playing hockey'">actions</a> and <a tooltip="For example: 'seagull', 'Ferrari'">objects</a> in the image. Tags can be multiple words, and should <a tooltip="i.e. a person shouldn't need to see your first tag to understand the second one fully.">stand alone</a>.</p>
 		<p><strong>Bad</strong> tags don't describe what is in the image, describe things <a tooltip="For example: 'blue', 'person'">too generally</a>, or describe things that are <a tooltip="tagging an image of a surfer as 'water'">not the focus</a> of the image. For this task, <a tooltip="For example: 'love it', 'been there'">personal tags</a> are not helpful.</p>
 
-		<p><strong>Time Estimate: {{time.estimate}}</strong></p>
+		<p><strong>Time Estimate: {{time.estimate | secondsToDateTime | date:'mm:ss'}}</strong></p>
 	</div>
 
 
