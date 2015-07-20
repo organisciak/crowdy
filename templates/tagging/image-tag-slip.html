@@ -33,7 +33,11 @@
 		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
 		</div>
 		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >
-			<span ng-style="strikethrough(preview)">{{time.left}} seconds left. {{completedItems()}} items tagged. {{taskset.payment + taskset.bonus | currency : $}} earned<span ng-show="{{completedItems() < 2}}"> (after minimum two items tagged)</span>. Next tagged item will given you a bonus of {{nextItemBonus | currency : $}}.</span><span style="font-weight:bold" ng-show='preview'> Previewing Task</span>
+			<div ng-style="strikethrough(preview)">
+				<p>{{time.left}} seconds left. {{taskset.payment + taskset.bonus | currency : $}} earned<span ng-show="{{completedItems() < 2}}"> (after minimum two items tagged)</span>.</p>
+				<p>Next item's bonus: {{nextItemBonus | currency : $}}.</p>
+			</div>
+			<p style="font-weight:bold" ng-show='preview'> Previewing Task</p>
 		</div>
       </div>
     </div>
