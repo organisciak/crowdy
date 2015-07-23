@@ -5,7 +5,7 @@
 	  </div>
 	  
       	<div class="panel-body">
-			<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForms.item_{{$index}}.$dirty && forms.turkForm.check)">
+		<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid)">
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.pattern">You need at least <strong>two</strong> tags. </alert>
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to enter tags. </alert>
 				<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
@@ -35,7 +35,7 @@
 		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >
 			<div ng-style="strikethrough(preview)">
 				<p>{{time.left}} seconds left. {{taskset.payment + taskset.bonus | currency : $}} earned<span ng-show="{{completedItems() < 2}}"> (after minimum two items tagged)</span>.</p>
-				<p>Next item's bonus: {{nextItemBonus | currency : $}}.</p>
+				<p>This item's bonus: {{nextItemBonus | currency : $}}.</p>
 			</div>
 			<p style="font-weight:bold" ng-show='preview'> Previewing Task</p>
 		</div>

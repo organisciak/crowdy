@@ -14,7 +14,7 @@
 		</p>
 		<div ng-show="phase==='feedback'">
 			<h2>
-				<span ng-show="stagingTasks.length !== 0">We ran out of tasks for you!</span>
+				<span ng-show="stagingTasks.length === 0">We ran out of tasks for you!</span>
 				<span ng-show="stagingTasks.length > 0">Time Done!</span>
 				You tagged {{taskset.tasks.length}} items and earned {{taskset.payment | currency : $}}<span ng-show="taskset.bonus"> plus {{ taskset.bonus | currency : $}} in bonuses.*</span></h2>
 			<p ng-show='taskset.bonus'>*Bonuses are paid after your contributions are verified.</p>
