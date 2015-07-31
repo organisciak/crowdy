@@ -20,6 +20,7 @@ module.exports = function (grunt) {
                 src: [
                 'lib/crowdy.js',
                 'lib/routes.js',
+                'lib/filters.js',
                 'lib/directives/directives.js',
                 'lib/controllers/instructions-controller.js',
                 'lib/controllers/modal-controller.js',
@@ -61,9 +62,9 @@ module.exports = function (grunt) {
                 boss: true
             },
             gruntfile: {
-                src: 'gruntfile.js'
+                src: 'Gruntfile.js'
             },
-            lib_test: {
+            lib: {
                 src: ['lib/**/*.js', 'test/**/*.js']
             }
         },
@@ -74,7 +75,7 @@ module.exports = function (grunt) {
             },
             autobuild: {
                 files: '<%= concat.dist.src %>',
-                tasks: ['jshint', 'concat', 'uglify']
+                tasks: ['newer:jshint:lib', 'concat', 'uglify']
                 }
         },
         githooks: {
@@ -91,6 +92,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-githooks');
+    grunt.loadNpmTasks('grunt-newer');
 
     // Default task
     grunt.registerTask('default', ['jshint', 'concat', 'uglify']);

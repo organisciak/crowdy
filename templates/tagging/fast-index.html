@@ -6,14 +6,18 @@
 	<div class="panel-body">
 		<p ng-show="phase==='instructions'">
 			<span ng-show="phase==='instructions'">Are you ready to start?</span>
-			Remember, you have <span class="timer">{{time.timeLeft}}</span> seconds.
+			Remember, you have <span class="timer">{{time.left}}</span> seconds.
 			<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
 		</p>
 		<p ng-show="phase==='tasks'">
-			You have <span class="timer">{{time.timeLeft}}</span> seconds.
+			You have <span class="timer">{{time.left}}</span> seconds.
 		</p>
 		<div ng-show="phase==='feedback'">
-			<h2>Time Done! You tagged {{taskset.tasks.length}} items!</h2>
+			<h2>
+				<span ng-show="stagingTasks.length === 0">We ran out of tasks for you!</span>
+				<span ng-show="stagingTasks.length > 0">Time Done!</span>
+				You tagged {{taskset.tasks.length}} items and earned {{taskset.payment | currency : $}}<span ng-show="taskset.bonus"> plus {{ taskset.bonus | currency : $}} in bonuses.*</span></h2>
+			<p ng-show='taskset.bonus'>*Bonuses are paid after your contributions are verified.</p>
 		</div>
 	</div>
 </div>
@@ -38,12 +42,15 @@
 <div class="row" ng-show="condition !== 'fast'">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
-</div><div class="row">
- <input id="submitButton" type="submit" name="submit" 
- class="btn btn-primary" 
- ng-click="submitForm($event)"
- ng-disabled="(forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (condition === 'fast' && phase !== 'feedback')" 
- ng-value="preview ? 'Previewing' : 'Submit'" />
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<input id="submitButton" type="submit" name="submit" 
+		 class="btn btn-primary" 
+		 ng-click="submitForm($event)"
+		 ng-disabled="submitBlocked || (forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (condition === 'fast' && phase !== 'feedback')" 
+		 ng-value="preview ? 'Previewing' : 'Submit'" />
+	 </div>
 </div>
 <span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
 </div>

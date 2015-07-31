@@ -1,5 +1,5 @@
 <section>
-	<h2>{{instructions.details.title}} <span ng-if="preview" class="alert alert-warning">PREVIEW</span></h2>
+	<h2>{{instructions.title}} <span ng-if="preview" class="alert alert-warning">PREVIEW</span></h2>
      <!-- WRAP THE REST OF TASK IN FORM -->
 
 <ul class="nav nav-tabs">
@@ -10,14 +10,14 @@
 
 <div class="row">
 	<!-- Main Instructions -->
-	<div ng-if="tab==='instruct'" ng-class="{'col-md-12': !preview, 'col-md-7': preview }">
+	<div ng-if="tab==='instruct'" ng-class="{'col-sm-12': !preview, 'col-sm-7': preview }">
 		<p>Label each of the images below with at least two tags. A tag is a short word or phrase describing what is in the image.</p>
-		<p ng-show="condition==='fast'">This task is timed: <em>tag as many items (minimum 2) as you can in {{timeLimit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
+		<p ng-show="condition==='fast'">This task is timed: <em>tag as many items (minimum 2) as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
 		<p>The purpose of this task is to help people find these images. Thus, one way to think of good tags is to consider, <em>if somebody was searching for this word, would this be an image that they'd want to find?</em></p>
 		<p><strong>Good</strong> and interesting tags describe <a tooltip="For example: 'running', 'playing hockey'">actions</a> and <a tooltip="For example: 'seagull', 'Ferrari'">objects</a> in the image. Tags can be multiple words, and should <a tooltip="i.e. a person shouldn't need to see your first tag to understand the second one fully.">stand alone</a>.</p>
 		<p><strong>Bad</strong> tags don't describe what is in the image, describe things <a tooltip="For example: 'blue', 'person'">too generally</a>, or describe things that are <a tooltip="tagging an image of a surfer as 'water'">not the focus</a> of the image. For this task, <a tooltip="For example: 'love it', 'been there'">personal tags</a> are not helpful.</p>
 
-		<p><strong>Time Estimate: {{instructions.details.timeEstimate}}</strong></p>
+		<p><strong>Time Estimate: {{time.estimate | secondsToDateTime | date:'mm:ss'}}</strong></p>
 	</div>
 
 
@@ -37,7 +37,7 @@
     <!-- Consent Language - Long -->
 	<div ng-show="tab==='info'" class="col-sm-12 irb">
 	<p>You are invited to participate in this research study on understanding task design in paid crowd settings. You will be asked to complete tasks related to online images. Your decision to participate or decline participation in this study is completely voluntary and you have the right to terminate your participation at any time.</p>
-	<p>This study will take approximately {{instructions.details.timeEstimate}} of your time, and you will be paid for performing the tasks as noted in the details above. Your participation in this research will be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues, such as published papers and a student thesis. We will make no efforts to identify you. There are no risks to individuals participating in this study beyond those that exist in daily life, and the judgments you provide will help requesters on paid crowd platforms design better tasks in the future.</p>
+	<p>This study will take approximately {{time.estimate}} of your time, and you will be paid for performing the tasks as noted in the details above. Your participation in this research will be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues, such as published papers and a student thesis. We will make no efforts to identify you. There are no risks to individuals participating in this study beyond those that exist in daily life, and the judgments you provide will help requesters on paid crowd platforms design better tasks in the future.</p>
 	<p>This study is conducted by <a tooltip="Phone:617-383-7674, Email:organis2@illinois.edu" href="mailto:organis2@illinois.edu" alt="email">Peter Organisciak</a> 
 	and advised by <a tooltip="Phone:217-265-0510, Email:twidale@illinois.edu" href="mailto:twidale@illinois.edu" alt="email">Michael Twidale</a>. from the 
 	University of Illinois. Please contact Mr. Organisciak or Dr. Twidale with any questions about this study. If you have any questions about your rights 
