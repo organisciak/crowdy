@@ -23,6 +23,9 @@ module.exports = function (grunt) {
                 'lib/directives/directives.js',
                 'lib/controllers/instructions-controller.js',
                 'lib/controllers/modal-controller.js',
+                'lib/controllers/basic-sibling-controller.js',
+                'lib/controllers/fast-sibling-controller.js',
+                'lib/controllers/task-controller.js',
                 'lib/controllers/tagging-task-controller.js',
                 'lib/controllers/tagging-task-item-controller.js',
                 'lib/controllers/feedback-controller.js'
