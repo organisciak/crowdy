@@ -1,13 +1,12 @@
 <ng-form name="forms.itemForms.item_{{$index}}">
     <div class="panel panel-default">
 	  <div class="panel-heading">
-		 Describe this image with 2 or more tags, separated by commas {{itemIndex}}
+		  How relevant is this image to <code>{{taskset.facet.meta.query}}</code>?
 	  </div>
 	  
       	<div class="panel-body">
-		<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid)">
-				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.pattern">You need at least <strong>two</strong> tags. </alert>
-				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to enter tags. </alert>
+		<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && (forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid))">
+				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to make a selection.</alert>
 				<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
@@ -17,20 +16,15 @@
 			</div>
 
 			<div class="form-group">
-			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }"
-			  name="contrib" 
-			  focus-me="{{condition === 'fast' && phase === 'tasks'}}"
-			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
-			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
-			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
-				ng-keypress = "pressEnter($event)"
-				ng-disabled = "(condition === 'fast' && phase !== 'tasks')"
-			  ng-list required>
-			</div>
-		</div>
 
-		<div ng-show="condition !== 'fast'" class="tag-display panel-footer">
-		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
+	<div class="radio" ng-repeat="v in judgeOptions"><label>
+	<input type="radio" ng-model="item.contribution.relevance" 
+        value="{{v}}" focus-me="{{condition === 'fast' && phase === 'tasks'}}"
+        ng-focus="timeStart(item)" ng-blur="timeStop(item)" ng-keypress = "pressEnter($event)"
+	ng-disabled = "(condition === 'fast' && phase !== 'tasks')" ng-list required>
+	{{v}}
+					</label></div>
+			</div>
 		</div>
 		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >
 			<div ng-style="strikethrough(preview)">
