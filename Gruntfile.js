@@ -29,6 +29,8 @@ module.exports = function (grunt) {
                 'lib/controllers/task-controller.js',
                 'lib/controllers/tagging-task-controller.js',
                 'lib/controllers/tagging-task-item-controller.js',
+                'lib/controllers/relevance-task-controller.js',
+                'lib/controllers/relevance-task-item-controller.js',
                 'lib/controllers/feedback-controller.js'
                 ],
                 dest: 'dist/crowdy.js'
