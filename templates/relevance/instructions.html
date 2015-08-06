@@ -15,9 +15,9 @@
 		<p>Below are possible image search results for the search "<strong>{{instructions.meta.query}}</strong>".</p>
 		<p>Tell us if each image is relevant (a good search result), somewhat relevant (an okay, but not perfect, result), or not relevant (a terrible search result).</p>
 		<p ng-show="condition==='fast'">This task is timed: <em>tell us about as many items as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
-		<p>{{instructions.meta.good}}</p>
-		<p>{{instructions.meta.ok}}</p>
-		<p>{{instructions.meta.poor}}</p>
+		<p ng-show="instructions.meta.good" class="text-success"><em>Very relevant</em> results show {{instructions.meta.good}}.</p>
+		<p ng-show="instructions.meta.ok" class="text-warning"><em>Somewhat relevant</em> results include {{instructions.meta.ok}}.</p>
+		<p ng-show="instructions.meta.poor" class="text-danger"><em>Non-relevant</em> can be any number of images that don't fit the search, including: {{instructions.meta.poor}}.</p>
 
 		<p><strong>Time Estimate: {{time.estimate | secondsToDateTime | date:'mm:ss'}}</strong></p>
 	</div>
@@ -39,7 +39,7 @@
     <!-- Consent Language - Long -->
 	<div ng-show="tab==='info'" class="col-sm-12 irb">
 	<p>You are invited to participate in this research study on understanding task design in paid crowd settings. You will be asked to complete tasks related to online images. Your decision to participate or decline participation in this study is completely voluntary and you have the right to terminate your participation at any time.</p>
-	<p>This study will take approximately {{time.estimate}} of your time, and you will be paid for performing the tasks as noted in the details above. Your participation in this research will be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues, such as published papers and a student thesis. We will make no efforts to identify you. There are no risks to individuals participating in this study beyond those that exist in daily life, and the judgments you provide will help requesters on paid crowd platforms design better tasks in the future.</p>
+	<p>This study will take approximately {{time.estimate | secondsToDateTime | date:'mm:ss'}} of your time, and you will be paid for performing the tasks as noted in the details above. Your participation in this research will be confidential and data will be averaged and reported in aggregate. The data from this study may be used in academic venues, such as published papers and a student thesis. We will make no efforts to identify you. There are no risks to individuals participating in this study beyond those that exist in daily life, and the judgments you provide will help requesters on paid crowd platforms design better tasks in the future.</p>
 	<p>This study is conducted by <a tooltip="Phone:617-383-7674, Email:organis2@illinois.edu" href="mailto:organis2@illinois.edu" alt="email">Peter Organisciak</a> 
 	and advised by <a tooltip="Phone:217-265-0510, Email:twidale@illinois.edu" href="mailto:twidale@illinois.edu" alt="email">Michael Twidale</a>. from the 
 	University of Illinois. Please contact Mr. Organisciak or Dr. Twidale with any questions about this study. If you have any questions about your rights 

@@ -15,16 +15,15 @@
 				tooltip-html="tooltip(item)" tooltip-placement="bottom" />
 			</div>
 
-			<div class="form-group">
-
+	<div class="form-group col-md-12">
 	<div class="radio" ng-repeat="v in judgeOptions"><label>
 	<input type="radio" ng-model="item.contribution.relevance" 
         value="{{v}}" focus-me="{{condition === 'fast' && phase === 'tasks'}}"
         ng-focus="timeStart(item)" ng-blur="timeStop(item)" ng-keypress = "pressEnter($event)"
 	ng-disabled = "(condition === 'fast' && phase !== 'tasks')" ng-list required>
 	{{v}}
-					</label></div>
-			</div>
+	</label></div>
+	</div>
 		</div>
 		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >
 			<div ng-style="strikethrough(preview)">
