@@ -1,24 +1,57 @@
-<relevance-instructions class="instructions" ng-controller="instructionsController"></relevance-instructions>
-<br />
 
-<form name="forms.turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
-<div class="row itemgrid" masonry reload-on-show>
-	<relevance-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></relevance-item>
+<form name="forms.turkForm" id="turkForm" novalidate>
+
+<relevance-instructions class="instructions" ng-controller="instructionsController"></relevance-instructions>
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<p ng-show="phase==='instructions'">
+			<span ng-show="phase==='instructions'">Are you ready to start?</span>
+			Remember, you have <span class="timer">{{time.left}}</span> seconds.
+			<button type="button" class="btn btn-primary" ng-show="phase === 'instructions'" ng-click="nextPhase();startTimer();">START</button>
+		</p>
+		<p ng-show="phase==='tasks'">
+			You have <span class="timer">{{time.left}}</span> seconds.
+		</p>
+		<div ng-show="phase==='feedback'">
+			<h2>
+				<span ng-show="stagingTasks.length === 0">We ran out of tasks for you!</span>
+				<span ng-show="stagingTasks.length > 0">Time Done!</span>
+				You judged {{taskset.tasks.length}} items and earned {{taskset.payment | currency : $}}<span ng-show="taskset.bonus"> plus {{ taskset.bonus | currency : $}} in bonuses.*</span></h2>
+			<p ng-show='taskset.bonus'>*Bonuses are paid after your contributions are verified.</p>
+		</div>
+	</div>
 </div>
+
+<div class="row itemgrid">
+	<relevance-item ng-show="$last && (phase === 'instructions' || phase === 'tasks')" 
+		class="col-md-12 col-sm-12 col-xs-12" 
+		ng-class="{'half-opacity':condition==='fast' && phase !=='tasks'}"
+		ng-repeat="item in taskset.tasks" 
+		ng-controller='relevanceTaskItemController'></relevance-item>
+</div>
+
 
 <!-- START FEEDBACK -->
-<div class="row" ng-show="preview">
+<div class="row" ng-show="!preview && phase === 'feedback'">
     <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
 </div>
+
 <!-- END FEEDBACK -->
+
 <!-- START SUBMIT -->
-<div class="row">
+<div class="row" ng-show="condition !== 'fast'">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
- <input id="submitButton" type="submit" name="submit" 
- class="btn btn-primary" 
- ng-disabled="submitBlocked || (forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview" 
- ng-value="preview ? 'Previewing' : 'Submit'" />
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<input id="submitButton" type="submit" name="submit" 
+		 class="btn btn-primary" 
+		 ng-click="submitForm($event)"
+		 ng-disabled="submitBlocked || (forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (condition === 'fast' && phase !== 'feedback')" 
+		 ng-value="preview ? 'Previewing' : 'Submit'" />
+	 </div>
 </div>
 <span ng-show="debug"><strong>DEBUG: data: </strong><pre>{{taskset | json: 4 }}</pre></span>
 </div>

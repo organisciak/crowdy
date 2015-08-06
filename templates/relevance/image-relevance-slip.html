@@ -7,7 +7,6 @@
       	<div class="panel-body">
 		<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && (forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid))">
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to make a selection.</alert>
-				<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
 			<div class="col-md-12">
@@ -23,6 +22,8 @@
 	ng-disabled = "(condition === 'fast' && phase !== 'tasks')" ng-list required>
 	{{v}}
 	</label></div>
+	<button class="btn btn-default" ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid" ng-click="pushStagedTask()">Next</button>
+	<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit Enter or press Next button to continue when you're ready!</alert>
 	</div>
 		</div>
 		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >

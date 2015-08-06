@@ -15,9 +15,11 @@
 		<p>Below are possible image search results for the search "<strong>{{instructions.meta.query}}</strong>".</p>
 		<p>Tell us if each image is relevant (a good search result), somewhat relevant (an okay, but not perfect, result), or not relevant (a terrible search result).</p>
 		<p ng-show="condition==='fast'">This task is timed: <em>tell us about as many items as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
-		<p ng-show="instructions.meta.good" class="text-success"><em>Very relevant</em> results show {{instructions.meta.good}}.</p>
-		<p ng-show="instructions.meta.ok" class="text-warning"><em>Somewhat relevant</em> results include {{instructions.meta.ok}}.</p>
-		<p ng-show="instructions.meta.poor" class="text-danger"><em>Non-relevant</em> can be any number of images that don't fit the search, including: {{instructions.meta.poor}}.</p>
+		<ul>
+		<li ng-show="instructions.meta.good" class="text-success"><em>Very relevant</em> results show {{instructions.meta.good}}.</li>
+		<li ng-show="instructions.meta.ok" class="text-warning"><em>Somewhat relevant</em> results include {{instructions.meta.ok}}.</li>
+		<li ng-show="instructions.meta.poor" class="text-danger"><em>Non-relevant</em> can be any number of images that don't fit the search, including: {{instructions.meta.poor}}.</li>
+		</ul>
 
 		<p><strong>Time Estimate: {{time.estimate | secondsToDateTime | date:'mm:ss'}}</strong></p>
 	</div>
