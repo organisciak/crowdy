@@ -5,10 +5,10 @@
 	  </div>
 	  
       	<div class="panel-body">
-		<div class="error-display" ng-show="(condition !== 'fast' && forms.turkForm.$submitted) || (condition === 'fast' && forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid)">
+		<div class="error-display" ng-show="(design !== 'fast' && forms.turkForm.$submitted) || (design === 'fast' && forms.itemForms.item_{{$index}}.$dirty && (forms.turkForm.check) || forms.itemForms.item_{{$index}}.$valid)">
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.pattern">You need at least <strong>two</strong> tags. </alert>
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to enter tags. </alert>
-				<alert type='info' ng-show="condition === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
+				<alert type='info' ng-show="design === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
 		
 			<div class="col-md-12">
@@ -19,20 +19,20 @@
 			<div class="form-group">
 			  <input type="text" class="form-control"  ng-model-options="{ updateOn: 'default blur', debounce: {default: 300, blur: 0} }"
 			  name="contrib" 
-			  focus-me="{{condition === 'fast' && phase === 'tasks'}}"
+			  focus-me="{{design === 'fast' && phase === 'tasks'}}"
 			  ng-model="item.contribution.tags" ng-pattern="/^.+\, ?./" placeholder="Enter tags" 
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
 				ng-keypress = "pressEnter($event)"
-				ng-disabled = "(condition === 'fast' && phase !== 'tasks')"
+				ng-disabled = "(design === 'fast' && phase !== 'tasks')"
 			  ng-list required>
 			</div>
 		</div>
 
-		<div ng-show="condition !== 'fast'" class="tag-display panel-footer">
+		<div ng-show="design !== 'fast'" class="tag-display panel-footer">
 		Your tags: <span class="item-tag" ng-repeat="tag in item.contribution.tags track by $index">{{tag}}</span>
 		</div>
-		<div ng-show="condition === 'fast'" class="tag-display panel-footer" >
+		<div ng-show="design === 'fast'" class="tag-display panel-footer" >
 			<div ng-style="strikethrough(preview)">
 				<p>{{time.left}} seconds left. {{taskset.payment + taskset.bonus | currency : $}} earned<span ng-show="{{completedItems() < 2}}"> (after minimum two items tagged)</span>.</p>
 				<p>This item's bonus: {{nextItemBonus | currency : $}}.</p>

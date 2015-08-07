@@ -25,7 +25,7 @@
 <div class="row itemgrid">
 	<tag-item ng-show="$last && (phase === 'instructions' || phase === 'tasks')" 
 		class="col-md-12 col-sm-12 col-xs-12" 
-		ng-class="{'half-opacity':condition==='fast' && phase !=='tasks'}"
+		ng-class="{'half-opacity':design==='fast' && phase !=='tasks'}"
 		ng-repeat="item in taskset.tasks" 
 		ng-controller='tagTaskItemController'></tag-item>
 </div>
@@ -39,7 +39,7 @@
 <!-- END FEEDBACK -->
 
 <!-- START SUBMIT -->
-<div class="row" ng-show="condition !== 'fast'">
+<div class="row" ng-show="design !== 'fast'">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
 </div>
@@ -48,7 +48,7 @@
 		<input id="submitButton" type="submit" name="submit" 
 		 class="btn btn-primary" 
 		 ng-click="submitForm($event)"
-		 ng-disabled="submitBlocked || (forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (condition === 'fast' && phase !== 'feedback')" 
+		 ng-disabled="submitBlocked || (forms.turkForm.$submitted && !forms.turkForm.$valid || !!($root.error)) || preview || (design === 'fast' && phase !== 'feedback')" 
 		 ng-value="preview ? 'Previewing' : 'Submit'" />
 	 </div>
 </div>
