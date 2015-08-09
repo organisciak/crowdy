@@ -1,0 +1,7 @@
+<h3>Performance Feedback</h3>
+	<p>Wondering if you're doing the task correctly? Here's an estimate of how good your past contributions have been:</p>
+	       <div class="col-sm-12 col-md-12"><progressbar value="performanceFeedback.scale.rank"></progressbar></div>
+	<p>You are in the <strong>{{performanceFeedback.percentile | intSuffix }} percentile of all contributors</strong>, meaning that</p><ul><li>you're doing better than {{performanceFeedback.percentile}}% of other people, but...</li><li>{{100-performanceFeedback.percentile}}% of other people are doing better than you.</li>
+	<li ng-show="performanceFeedback.improving">Hey, it looks like you're improving since last time!</li>
+	</ul>
+	<p>If you're doing well, thank you. If you think you should be doing better, make sure to read the instructions to doublecheck that you're not missing something. Remember, this is an estimate and some tasks are easier than others.</p>
