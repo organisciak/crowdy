@@ -6,12 +6,14 @@
   <li role="presentation" ng-class="{active:tab === 'instruct'}"><a href ng-click="setTab('instruct')">Instructions</a></li>
   <li role="presentation" ng-class="{active:tab === 'info'}"><a href ng-click="setTab('info')">Study Info</a></li>
   <li role="presentation" ng-class="{active:tab === 'tips'}"><a href ng-click="setTab('tips')">Tips</a></li>
+  <li role="presentation" ng-show='performanceFeedback' ng-class="{active:tab === 'performance'}">
+	  <a href ng-click="setTab('performance')">Performance Feedback</a></li>
   <li role="presentation" ng-class="{active:tab === 'collapse'}"><a href ng-click="setTab('collapse')">Collapse Instructions</a></li>
 </ul>
 
 <div class="row">
 	<!-- Main Instructions -->
-	<div ng-if="tab==='instruct'" ng-class="{'col-sm-12': !preview, 'col-sm-7': preview }">
+	<div ng-if="tab==='instruct'" ng-class="{'col-sm-12': !preview && design!=='feedback', 'col-sm-7': preview || design === 'feedback' }">
 		<p>Below are possible image search results for the search "<strong>{{instructions.meta.query}}</strong>".</p>
 		<p>Tell us if each image is relevant (a good search result), somewhat relevant (an okay, but not perfect, result), or not relevant (a terrible search result).</p>
 		<p ng-show="design==='fast'">This task is timed: <em>tell us about as many items as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
@@ -58,6 +60,13 @@
 		<li>Read the instructions for help on telling the difference between 'very' and 'somewhat' relevant.</li>
 		</ul>
 	</div>
+
+    <!-- Performance Feedback -->
+     <div class="col-sm-12" ng-show="tab==='performance' && performanceFeedback">
+     <performance-feedback></performance-feedback>
+     </div>
+
+
 
 </div>
 </section>

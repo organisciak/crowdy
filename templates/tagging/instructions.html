@@ -6,6 +6,8 @@
   <li role="presentation" ng-class="{active:tab === 'instruct'}"><a href ng-click="setTab('instruct')">Instructions</a></li>
   <li role="presentation" ng-class="{active:tab === 'info'}"><a href ng-click="setTab('info')">Study Info</a></li>
   <li role="presentation" ng-class="{active:tab === 'tips'}"><a href ng-click="setTab('tips')">Tips</a></li>
+  <li role="presentation" ng-show='performanceFeedback' ng-class="{active:tab === 'performance'}">
+	  <a href ng-click="setTab('performance')">Performance Feedback</a></li>
   <li role="presentation" ng-class="{active:tab === 'collapse'}"><a href ng-click="setTab('collapse')">Collapse Instructions</a></li>
 </ul>
 
@@ -16,7 +18,7 @@
 		<p ng-show="design==='fast'">This task is timed: <em>tag as many items (minimum 2) as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
 		<p>The purpose of this task is to help people find these images. Thus, one way to think of good tags is to consider, <em>if somebody was searching for this word, would this be an image that they'd want to find?</em></p>
 		<p><strong>Good</strong> and interesting tags describe <a tooltip="For example: 'running', 'playing hockey'">actions</a> and <a tooltip="For example: 'seagull', 'Ferrari'">objects</a> in the image. Tags can be multiple words, and should <a tooltip="i.e. a person shouldn't need to see your first tag to understand the second one fully.">stand alone</a>.</p>
-		<p><strong>Bad</strong> tags don't describe what is in the image, describe things <a tooltip="For example: 'blue', 'person'">too generally</a>, or describe things that are <a tooltip="tagging an image of a surfer as 'water'">not the focus</a> of the image. For this task, <a tooltip="For example: 'love it', 'been there'">personal tags</a> are not helpful.</p>
+		<p><strong>Bad</strong> tags don't describe what is in the image, describe things <a tooltip="For example: 'blue', 'person'">too generally</a>, or describe things that are <a tooltip="tagging an image of a surfer as 'water'">not the focus</a> of the image. For this task, <a tooltip="For example: 'love it', 'been there'">personal tags</a> are not helpful. (<em>Hover over links for examples</em>)</p>
 
 		<p><strong>Time Estimate: {{time.estimate | secondsToDateTime | date:'mm:ss'}}</strong></p>
 	</div>
@@ -55,6 +57,12 @@
       <p><em>Not enough to say?</em> If you can only think of one tag, add "<strong>TOO HARD</strong>" as the second.</p>
       <p>Hovering over an image will show some information that people wrote about the image. This may or may not be useful.</p>
     </div>
+    
+    
+    <!-- Performance Feedback -->
+     <div class="col-sm-12" ng-show="tab==='performance' && performanceFeedback">
+     <performance-feedback></performance-feedback>
+     </div>
 
 </div>
 </section>
