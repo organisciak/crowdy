@@ -19,12 +19,15 @@
 	<input type="radio" ng-model="item.contribution.relevance" value="{{v}}" 
 	  focus-me="{{design === 'fast' && phase === 'tasks'}}"
         ng-focus="timeStart(item)" ng-blur="timeStop(item)" ng-keypress = "pressEnter($event)"
-	ng-disabled = "(design === 'fast' && phase !== 'tasks')" ng-list required>
+	ng-disabled = "(condition === 'training' && item.checked) || (design === 'fast' && phase !== 'tasks')" ng-list required>
 	{{v}}
 	</label></div>
 	<button class="btn btn-default" ng-show="design === 'fast' && forms.itemForms.item_{{$index}}.$valid" ng-click="pushStagedTask()">Next</button>
 	<alert type='info' ng-show="design === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit Enter or press Next button to continue when you're ready!</alert>
 	</div>
+		</div>
+		<div ng-show="training" class="panel-footer">
+		<relevance-training ng-show="training"></relevance-training>
 		</div>
 		<div ng-show="design === 'fast'" class="tag-display panel-footer" >
 			<div ng-style="strikethrough(preview)">

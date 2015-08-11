@@ -3,11 +3,11 @@
 
 <form name="forms.turkForm" id="turkForm" method="POST" ng-submit="submitForm($event)" novalidate>
 <div class="row itemgrid" masonry reload-on-show>
-	<relevance-item class="masonry-brick col-md-4 col-sm-4 col-xs-6" ng-repeat="item in taskset.tasks" ng-controller='tagTaskItemController'></relevance-item>
+	<relevance-item class="masonry-brick col-md-6 col-sm-6 col-xs-6" ng-repeat="item in taskset.tasks" ng-class="" ng-controller='relevanceTaskItemController'></relevance-item>
 </div>
 
 <!-- START FEEDBACK -->
-<div class="row" ng-show="preview">
+<div class="row" ng-hide="preview">
     <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
 </div>
 <!-- END FEEDBACK -->
@@ -15,7 +15,15 @@
 <div class="row">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 
-	<alert type="info" ng-show="bonusStructure.laterTask > 0">Hey, we like when you stick around. If you do more tasks, we'll give you a <strong>{{bonusStructure.laterTask | currency : $}} bonus</strong> for each extra assignment.</alert>
+	<alert type="warning" ng-show="forms.turkForm.$submitted && !allChecked">
+	Don't forget to check all your answers!
+	</alert>
+	
+	<alert type="info" ng-show="forms.turkForm.$valid && training && bonusStructure.laterTask > 0">Hey, now that you've practiced, do some real tasks! We won't give you the answers next time, but we're sure that you'll be quick!
+If you do more tasks, we'll give you a <strong>{{bonusStructure.laterTask | currency : $}} bonus</strong> for each extra assignment.</alert>
+
+	<alert type="info" ng-show="forms.turkForm.$valid && !training && bonusStructure.laterTask > 0">Hey, we like when you stick around. If you do more tasks, we'll give you a <strong>{{bonusStructure.laterTask | currency : $}} bonus</strong> for each extra assignment.</alert>
+
 
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
@@ -33,3 +41,5 @@
 <input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
 <input type="hidden" name="test" value="{{ taskset | json }}" />
 </form>
+
+<br style="margin-top:50px" />

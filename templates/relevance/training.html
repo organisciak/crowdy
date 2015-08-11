@@ -1,0 +1,15 @@
+
+<button ng-click="checkAnswer(item)" 
+	type="button" 
+	 ng-disabled="forms.itemForms.item_{{$index}}.$invalid"
+ 	ng-hide="item.checked" 
+  	class="btn btn-default">
+	Check your Answer
+</button>
+
+<div ng-show="item.checked" class="answer">
+	<span ng-show="choice==bestAnswer">Great! That's the best answer.</span>
+	<span ng-show="choice!=bestAnswer">A better choice is <code>{{bestAnswer}}</code>.</span>
+	<p><em>{{ item.answer.teaching.tips }}</em></p>
+
+</div>

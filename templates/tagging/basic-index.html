@@ -7,7 +7,7 @@
 </div>
 
 <!-- START FEEDBACK -->
-<div class="row" ng-show="preview">
+<div class="row" ng-hide="preview">
     <feedback-form ng-controller='feedbackCtrl'></feedback-form> 
 </div>
 <!-- END FEEDBACK -->
@@ -17,6 +17,10 @@
 	
 
 	<alert type="info" ng-show="bonusStructure.laterTask > 0">Hey, we like when you stick around. If you do more tasks, we'll give you a <strong>{{bonusStructure.laterTask | currency : $}} bonus</strong> for each extra assignment.</alert>
+
+	<alert type="warning" ng-show=".turkForm.$submitted && !allChecked">
+	Don't forget to check all your answers!
+	</alert>
 
 	<input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
  <input id="submitButton" type="submit" name="submit" 
@@ -29,8 +33,11 @@
 <!-- END SUBMIT-->
 </form>
 
+
 <!-- TURK SUBMISSION FORM, because ng-submit and action don't mix -->
 <form name='forms.turkHiddenForm' method="POST" id='turkHiddenForm' action={{formSubmitTo}}>
 <input type="hidden" name="assignmentId" id="myAssignmentId" value="{{assignmentId}}" />
 <input type="hidden" name="test" value="{{ taskset | json }}" />
 </form>
+
+<div style="padding-top:100px;margin-top:100px;"></div>
