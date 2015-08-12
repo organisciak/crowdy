@@ -10,10 +10,16 @@
 				<alert type='danger' ng-show="forms.itemForms.item_{{$index}}.$error.required">Need to enter tags. </alert>
 				<alert type='info' ng-show="design === 'fast' && forms.itemForms.item_{{$index}}.$valid">Great! Hit enter to continue when you're done!</alert>
 			</div>
-		
-			<div class="col-md-12">
+			
+			<div class="row">
+				<div ng-class="{'col-md-12':!training, 'col-md-6':training, 'col-sm-6':training, 'col-xs-6':training}" >
 				<img class="img-responsive" ng-src="{{item.meta.image['236']}}" ng-alt="{{item.meta.title}}"
 				tooltip-html="tooltip(item)" tooltip-placement="bottom" />
+			</div>
+			
+			<div ng-show="training" class="col-sm-6 col-xs-6 col-md-6">
+			<tagging-training ng-show="training"></tagging-training>
+			</div>
 			</div>
 
 			<div class="form-group">
@@ -24,9 +30,10 @@
 			  ng-focus="timeStart(item)" ng-blur="timeStop(item)"
 			  tooltip-html="'<div width=150>TIPS<br/>Hover over the image for possible ideas.<br/>If you cannot think of a second tag, add TOOHARD.</div>'"  tooltip-trigger="focus" tooltip-placement="right" tooltip-popup-delay="7000"
 				ng-keypress = "pressEnter($event)"
-				ng-disabled = "(design === 'fast' && phase !== 'tasks')"
+				ng-disabled = "(condition === 'training' && item.checked) || (design === 'fast' && phase !== 'tasks')"
 			  ng-list required>
 			</div>
+			
 		</div>
 
 		<div ng-show="design !== 'fast'" class="tag-display panel-footer">
