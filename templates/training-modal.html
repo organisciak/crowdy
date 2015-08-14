@@ -1,0 +1,27 @@
+<div class="modal-body">
+
+		<p>Below are possible image search results for the search "<strong>{{training.query}}</strong>".</p>
+		<p>Tell us if each image is relevant (a good search result), somewhat relevant (an okay, but not perfect, result), or not relevant (a terrible search result).</p>
+		<p ng-show="design==='fast'">This task is timed: <em>tell us about as many items as you can in {{time.limit}} seconds.</em> We'll give you bonuses for each extra image after the second.</p>
+<div class="row">
+	<div class="col-sm-4 text-success" ng-show="training.good"><em>Very relevant</em> results show {{training.good}}.
+	Examples:
+	<div ng-repeat="image in training.examples.good"><img src="{{image}}" class="img-responsive" /></div>
+	</div>
+		<div ng-show="training.ok" class="col-sm-4 text-warning"><em>Somewhat relevant</em> results include {{training.ok}}.
+		
+	Examples:
+	<div ng-repeat="image in training.examples.okay"><img src="{{image}}" class="img-responsive" /></div>
+		</div>
+		<div ng-show="training.poor" class="col-sm-4 text-danger"><em>Non-relevant</em> can be any number of images that don't fit the search, including: {{training.poor}}.
+	Examples:
+		
+	<div ng-repeat="image in training.examples.poor"><img src="{{image}}" class="img-responsive" /></div>
+		</div>
+</div><!--End row-->
+
+Hovering over the image gives some accompanying text, which may or may not be useful.
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Continue</button>
+</div>
