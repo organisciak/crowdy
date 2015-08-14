@@ -1,0 +1,18 @@
+
+<button ng-click="checkAnswer(item)" 
+	type="button" 
+	 ng-disabled="forms.itemForms.item_{{$index}}.$invalid"
+ 	ng-hide="item.checked" 
+  	class="btn btn-default">
+	Check your Answer
+</button>
+
+<div ng-show="item.checked" class="answer">
+	<p>{{ message }}</p>
+	<p><em>{{item.answer.teaching.tips}}</em></p>
+	<p>Examples:</p>
+	<pi class="text-size:smaller"><strong>Great tags:</strong> {{item.answer.tags.great.join(', ')}}.<br/>
+	<strong>Good tags:</strong> {{item.answer.tags.good.join(', ')}}.<br/>
+	<strong>OK tags:</strong> {{item.answer.tags.ok.join(', ')}}.<br/>
+	<strong>Poor tags:</strong> {{item.answer.tags.poor.join(', ')}}.</p>
+</div>

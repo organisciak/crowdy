@@ -15,7 +15,7 @@
 <div class="row">
 	<alert type='warning' ng-show="forms.turkForm.$submitted && !forms.turkForm.$valid"> Sorry but {{forms.turkForm.$error.pattern.length + forms.turkForm.$error.required.length}} errors exist above. Please fix and resubmit. </alert>
 
-	<alert type="warning" ng-show="forms.turkForm.$submitted && !allChecked">
+	<alert type="warning" ng-show="forms.turkForm.$submitted && !allChecked && (condition === 'training')">
 	Don't forget to check all your answers!
 	</alert>
 	
